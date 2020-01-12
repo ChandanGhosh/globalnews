@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Global News</title>
+		<link
+			type="text/css"
+			href="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous"
+		/>
+		<link
+			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<div class="container">
+			<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+				<a class="navbar-brand" href="/">World news</a>
+				<ul class="navbar-nav mr-auto">
+					<li>
+						<a href="/">Test</a>
+					</li>
+				</ul>
+				<div class="navbar-nav ml-auto">
+					<form class="form-inline float-right" method="POST" action="/">
+						<div class="input-group col-md-12">
+							<input
+								type="text"
+								class="form-control"
+								name="search"
+								placeholder="Search news"
+							/>
+							<span class="input-group-append">
+								<button class="btn btn-outline-secondary" type="submit">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</nav>
+
+			<div class="card-columns">
+				{{range .Articles }}
+				<div>
+					<div class="card">
+						<img
+							class="card-img-top"
+							decoding="async"
+							src="{{.URLToImage}}"
+							alt="{{.Source.Name}}"
+						/>
+						<div class="card-body">
+							<h5 class="card-title">{{.Title}}</h5>
+							<p class="card-text">{{.Description}}</p>
+							<a href="{{.URL}}" target="_blank" class="btn btn-primary"
+								>more</a
+							>
+							<p class="card-text">
+								<small class="text-muted"
+									>By {{.Author}} {{.Source.Name}}
+									{{.GetHumanFriendlyPublishedDate}}
+								</small>
+							</p>
+						</div>
+					</div>
+				</div>
+				{{end}}
+			</div>
+		</div>
+	</body>
+</html>
