@@ -1,4 +1,4 @@
-module github.com/chandanghosh/newsapp
+module github.com/chandanghosh/globalnews
 
 go 1.13
 

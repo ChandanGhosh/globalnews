@@ -4,12 +4,13 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"github.com/chandanghosh/newsapp/models"
 	"html/template"
 	"log"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/chandanghosh/globalnews/models"
 )
 
 var apiKey *string
@@ -27,7 +28,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 		query = r.Form.Get("search")
 	}
 
-	formattedEndpoint := newsAPIBaseURL + "?q=%s&apiKey=%s&sortBy=publishedAt,popularity&language=en"
+	formattedEndpoint := newsAPIBaseURL + "?q=%s&apiKey=%s&sortBy=popularity&language=en"
 	finalEndpoint := fmt.Sprintf(formattedEndpoint, query, *apiKey)
 
 	var client = &http.Client{
@@ -65,6 +66,8 @@ func main() {
 
 	if port := os.Getenv("PORT"); port == "" {
 		port = "3000"
-		log.Panicln(http.ListenAndServe(":"+port, nil))
+		fmt.Println("Server started at http://localhost:"+port)
+		log.Panic(http.ListenAndServe(":3000", nil))
+
 	}
 }
